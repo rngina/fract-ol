@@ -1,32 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:29:05 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/16 13:00:16 by rtavabil         ###   ########.fr       */
+/*   Created: 2024/01/15 15:55:47 by rtavabil          #+#    #+#             */
+/*   Updated: 2024/01/15 16:00:59 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	main(int argc, char **argv)
+void	free_error(void)
 {
-	t_fractal	fractal;
-
-	if ((argc == 2 && !ft_strncmp("mandelbrot", argv[1], 10)) ||
-		(argc == 4 && !ft_strncmp("julia", argv[1], 5)))
-	{
-		fractal.title = argv[1];
-		init(&fractal);
-		//fractal render
-		mlx_loop(fractal.mlx);
-	}
-	else
-	{
-		ft_putstr_fd(ERROR_MESSAGE, 0);
-		exit(1);
-	}
+	perror("Something went wrong\n");
+	exit(1);
 }
