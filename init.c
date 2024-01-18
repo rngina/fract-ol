@@ -6,7 +6,7 @@
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:36:58 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/16 13:23:07 by rtavabil         ###   ########.fr       */
+/*   Updated: 2024/01/18 13:52:16 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ int	handle_close_x(t_fractal *fractal)
 	mlx_destroy_display(fractal->mlx);
 	free(fractal->mlx);
 	exit(1);
+}
+
+void	set_values(t_fractal *fractal)
+{
+	fractal->escape = ESCAPE;
+	fractal->iterations = ITERATIONS;
 }
 
 void	init(t_fractal *fractal)
@@ -63,8 +69,7 @@ void	init(t_fractal *fractal)
 											&(fractal->img.line_length),
 											&(fractal->img.endian));
 	printf("img_addr init\n");
-
-	//event listener
+	set_values(fractal);
 	mlx_key_hook(fractal->mlx_win, handle_close_esc, fractal);
 	mlx_hook(fractal->mlx_win,
 				DestroyNotify,

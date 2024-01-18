@@ -1,32 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   complex_math.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/11 14:29:05 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/18 13:51:27 by rtavabil         ###   ########.fr       */
+/*   Created: 2024/01/16 14:24:05 by rtavabil          #+#    #+#             */
+/*   Updated: 2024/01/18 13:45:05 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-int	main(int argc, char **argv)
+t_complex	sum_z(t_complex z1, t_complex z2)
 {
-	t_fractal	fractal;
+	t_complex	ret;
 
-	if ((argc == 2 && !ft_strncmp("mandelbrot", argv[1], 10)) ||
-		(argc == 4 && !ft_strncmp("julia", argv[1], 5)))
-	{
-		fractal.title = argv[1];
-		init(&fractal);
-		render(&fractal);
-		mlx_loop(fractal.mlx);
-	}
-	else
-	{
-		ft_putstr_fd(ERROR_MESSAGE, 0);
-		exit(1);
-	}
+	ret.real = z1.real + z2.real;
+	ret.im = z1.im + z2.im;
+	return (ret);
+}
+
+t_complex	mult_z(t_complex z1, t_complex z2)
+{
+	t_complex	ret;
+
+	ret.real = z1.real * z1.real - z2.im * z2.im;
+	ret.im = 2 * z1.real * z2.im;
+	return (ret);
 }

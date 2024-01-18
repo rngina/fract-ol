@@ -6,13 +6,14 @@
 #    By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/11 16:39:33 by rtavabil          #+#    #+#              #
-#    Updated: 2024/01/15 16:03:07 by rtavabil         ###   ########.fr        #
+#    Updated: 2024/01/16 17:14:03 by rtavabil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := fractol
 
-SRC := main.c strings.c init.c error.c
+SRC :=  main.c strings.c init.c error.c render.c \
+		complex_math.c
 OBJ := $(SRC:.c=.o)
 
 CC = gcc
