@@ -6,7 +6,7 @@
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:54:41 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/18 16:51:18 by rtavabil         ###   ########.fr       */
+/*   Updated: 2024/01/22 16:39:10 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,20 @@ void	check_pixel(int x, int y, t_fractal *fractal)
 
 	z.real = 0.0;
 	z.im = 0.0;
-	c.real = scale_range(x, -2, 2, 0, WIDTH);
-	c.im = scale_range(y, 2, -2, 0, HEIGHT);
+	if (fractal->title == "julia")
+	{
+		c.real = (scale_range(x, -2, 2, 0, WIDTH) + fractal->shift_x)
+			* fractal->zoom;
+		c.im = (scale_range(y, 2, -2, 0, HEIGHT) + fractal->shift_y)
+			* fractal->zoom;
+	}
+	else
+	{
+		c.real = (scale_range(x, -2, 2, 0, WIDTH) + fractal->shift_x)
+			* fractal->zoom;
+		c.im = (scale_range(y, 2, -2, 0, HEIGHT) + fractal->shift_y)
+			* fractal->zoom;
+	}
 	i = 0;
 	while (i < fractal->iterations)
 	{

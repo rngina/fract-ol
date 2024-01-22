@@ -6,7 +6,7 @@
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:27:33 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/18 17:13:35 by rtavabil         ###   ########.fr       */
+/*   Updated: 2024/01/22 17:00:47 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ julia <value 1> <value 2>\"\n"
 # define WIDTH 800
 # define HEIGHT 800
 
-# define ESCAPE 2
-# define ITERATIONS 20
+# define ESCAPE 6
+# define ITERATIONS 40
 
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
@@ -71,6 +71,11 @@ typedef struct s_fractal
 	t_image	img;
 	int		escape;
 	int		iterations;
+	double	shift_x;
+	double	shift_y;
+	double	zoom;
+	double	julia_x;
+	double	julia_y;
 }			t_fractal;
 
 int			ft_strncmp(char *s1, char *s2, int n);
@@ -82,5 +87,7 @@ t_complex	sum_z(t_complex z1, t_complex z2);
 t_complex	mult_z(t_complex z1, t_complex z2);
 
 void		render(t_fractal *fractal);
+
+double		ft_atof(char *arr);
 
 #endif
