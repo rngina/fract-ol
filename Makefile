@@ -6,14 +6,14 @@
 #    By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/11 16:39:33 by rtavabil          #+#    #+#              #
-#    Updated: 2024/01/22 16:06:35 by rtavabil         ###   ########.fr        #
+#    Updated: 2024/01/23 17:31:41 by rtavabil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := fractol
 
 SRC :=  main.c strings.c init.c error.c render.c \
-		complex_math.c ft_atof.c
+		complex_math.c ft_atof.c burning_ship.c
 OBJ := $(SRC:.c=.o)
 
 CC = gcc
@@ -32,7 +32,7 @@ OBJS		= $(addprefix $(OBJ_PATH), $(OBJ))
 all: $(MLX) $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC) -g
 
 $(OBJS): $(OBJ_PATH)
 

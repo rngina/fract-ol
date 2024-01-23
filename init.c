@@ -6,7 +6,7 @@
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/15 13:36:58 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/22 14:38:47 by rtavabil         ###   ########.fr       */
+/*   Updated: 2024/01/23 13:56:31 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int	handle_key(int keysym, t_fractal *fractal)
 		exit(1);
 	}
 	if (keysym == XK_Up)
-		fractal->shift_y -= 0.2;
+		fractal->shift_y -= 0.2 * fractal->zoom;
 	if (keysym == XK_Down)
-		fractal->shift_y += 0.2;
+		fractal->shift_y += 0.2 * fractal->zoom;
 	if (keysym == XK_Right)
-		fractal->shift_x -= 0.2;
+		fractal->shift_x -= 0.2 * fractal->zoom;
 	if (keysym == XK_Left)
-		fractal->shift_x += 0.2;
-	render(fractal);
+		fractal->shift_x += 0.2 * fractal->zoom;
+	render_ship(fractal);
 	return (0);
 }
 
@@ -49,7 +49,7 @@ int	handle_mouse(int button, int x, int y, t_fractal *fractal)
 		fractal->zoom *= 1.1;
 	else if (button == 5)
 		fractal->zoom /= 1.1;
-	render(fractal);
+	render_ship(fractal);
 	return (x * y);
 }
 
@@ -67,7 +67,6 @@ void	init(t_fractal *fractal)
 	fractal->mlx = mlx_init();
 	if (!fractal->mlx)
 		free_error();
-	printf("mlx init\n");
 	fractal->mlx_win = mlx_new_window(fractal->mlx, WIDTH, HEIGHT,
 			fractal->title);
 	if (!fractal->mlx_win)
@@ -76,7 +75,6 @@ void	init(t_fractal *fractal)
 		free(fractal->mlx);
 		free_error();
 	}
-	printf("mlx_win init\n");
 	fractal->img.img = mlx_new_image(fractal->mlx, WIDTH, HEIGHT);
 	if (!fractal->img.img)
 	{
@@ -85,12 +83,10 @@ void	init(t_fractal *fractal)
 		free(fractal->mlx);
 		free_error();
 	}
-	printf("img init\n");
 	fractal->img.addr = mlx_get_data_addr(fractal->img.img,
 											&(fractal->img.bits_per_pixel),
 											&(fractal->img.line_length),
 											&(fractal->img.endian));
-	printf("img_addr init\n");
 	set_values(fractal);
 	mlx_mouse_hook(fractal->mlx_win, handle_mouse, fractal);
 	mlx_key_hook(fractal->mlx_win, handle_key, fractal);

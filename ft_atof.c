@@ -6,7 +6,7 @@
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 15:06:20 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/22 15:57:18 by rtavabil         ###   ########.fr       */
+/*   Updated: 2024/01/23 12:32:19 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,28 @@
 
 double	ft_atof(char *arr)
 {
-	int i;
-	int j;
-	double val;
+	long integer_part;
+	double fractional_part;
+	double pow;
+	int sign;
 
-	i = 0;
-	j = 0;
-	val = 0;
-	while (*(arr + i) != '\0' && *(arr + i) >= '0' && *(arr + i) <= '9')
+	integer_part = 0;
+	fractional_part = 0;
+	sign = +1;
+	pow = 1;
+	while ((*arr >= 9 && *arr <= 13) || 32 == *arr)
+		++arr;
+	while ('+' == *arr || '-' == *arr)
+		if ('-' == *arr++)
+			sign = -sign;
+	while (*arr != '.' && *arr)
+		integer_part = (integer_part * 10) + (*arr++ - 48);
+	if ('.' == *arr)
+		++arr;
+	while (*arr)
 	{
-		val = (val * 10) + (*(arr + i) - '0');
-		i++;
+		pow /= 10;
+		fractional_part = fractional_part + (*arr++ - 48) * pow;
 	}
-	if (*(arr + i) == '.')
-		i++;
-	while (*(arr + i) != '\0' && *(arr + i) >= '0' && *(arr + i) <= '9')
-	{
-		val = (val * 10) + (*(arr + i) - '0');
-		i++;
-		j--;
-	}
-	val = val * pow(10, j);
-	return (val);
+	return ((integer_part + fractional_part) * sign);
 }

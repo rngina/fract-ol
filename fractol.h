@@ -6,7 +6,7 @@
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:27:33 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/22 17:00:47 by rtavabil         ###   ########.fr       */
+/*   Updated: 2024/01/23 16:50:57 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ julia <value 1> <value 2>\"\n"
 # define WIDTH 800
 # define HEIGHT 800
 
-# define ESCAPE 6
-# define ITERATIONS 40
+# define ESCAPE 4
+# define ITERATIONS 42
 
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
@@ -47,6 +47,7 @@ julia <value 1> <value 2>\"\n"
 # define BROWN 0xA52A2A
 # define PINK 0xFFC0CB
 # define LIME 0x00FF00
+# define PeachPuff2 0xeecbad
 
 typedef struct s_complex
 {
@@ -85,9 +86,16 @@ void		free_error(void);
 
 t_complex	sum_z(t_complex z1, t_complex z2);
 t_complex	mult_z(t_complex z1, t_complex z2);
+double		abs_z(double num);
 
 void		render(t_fractal *fractal);
 
 double		ft_atof(char *arr);
+
+void		render_ship(t_fractal *fractal);
+t_complex	ship_z(t_complex z, t_complex c);
+void		set_c_ship(t_complex *c, t_fractal *fractal);
+void	check_pixel_ship(int x, int y, t_fractal *fractal);
+void	set_c(t_complex *c, t_complex z, t_fractal *fractal);
 
 #endif
