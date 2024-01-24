@@ -6,14 +6,15 @@
 #    By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/11 16:39:33 by rtavabil          #+#    #+#              #
-#    Updated: 2024/01/23 17:31:41 by rtavabil         ###   ########.fr        #
+#    Updated: 2024/01/24 16:41:08 by rtavabil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := fractol
 
 SRC :=  main.c strings.c init.c error.c render.c \
-		complex_math.c ft_atof.c burning_ship.c
+		complex_math.c ft_atof.c burning_ship.c \
+		map.c julia.c init_julia.c init_ship.c
 OBJ := $(SRC:.c=.o)
 
 CC = gcc

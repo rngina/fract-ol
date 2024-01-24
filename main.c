@@ -6,7 +6,7 @@
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:29:05 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/23 16:22:32 by rtavabil         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:46:59 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,26 @@ int	main(int argc, char **argv)
 	if (argc == 2 && !ft_strncmp("mandelbrot", argv[1], 10))
 	{
 		fractal.title = argv[1];
-		init(&fractal);
-		render(&fractal);
+		init_man(&fractal);
+		render_man(&fractal);
 		mlx_loop(fractal.mlx);
 	}
 	if (argc == 4 && !ft_strncmp("ship", argv[1], 4))
 	{
 		fractal.title = argv[1];
-		fractal.julia_x = ft_atof(argv[2]);
-		fractal.julia_y = ft_atof(argv[3]);
-		init(&fractal);
+		fractal.cx = ft_atof(argv[2]);
+		fractal.cy = ft_atof(argv[3]);
+		init_ship(&fractal);
 		render_ship(&fractal);
 		mlx_loop(fractal.mlx);
 	}
 	if (argc == 4 && !ft_strncmp("julia", argv[1], 5))
 	{
-		fractal.julia_x = ft_atof(argv[2]);
-		fractal.julia_y = ft_atof(argv[3]);
+		fractal.cx = ft_atof(argv[2]);
+		fractal.cy = ft_atof(argv[3]);
 		fractal.title = argv[1];
-		init(&fractal);
-		render(&fractal);
+		init_julia(&fractal);
+		render_julia(&fractal);
 		mlx_loop(fractal.mlx);
 	}
 	else

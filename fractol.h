@@ -6,7 +6,7 @@
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:27:33 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/23 16:50:57 by rtavabil         ###   ########.fr       */
+/*   Updated: 2024/01/24 16:46:02 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,15 @@ typedef struct s_image
 	int		endian;
 }			t_image;
 
+
+typedef struct s_limit
+{
+		double	max_x;
+		double	min_x;
+		double	max_y;
+		double	min_y;
+}				t_limit;
+
 typedef struct s_fractal
 {
 	char	*title;
@@ -75,27 +84,46 @@ typedef struct s_fractal
 	double	shift_x;
 	double	shift_y;
 	double	zoom;
-	double	julia_x;
-	double	julia_y;
+	double	cx;
+	double	cy;
+	int		mouse_x;
+	int		mouse_y;
+	t_limit	limit;
 }			t_fractal;
 
 int			ft_strncmp(char *s1, char *s2, int n);
 void		ft_putstr_fd(char *s, int fd);
-void		init(t_fractal *fractal);
 void		free_error(void);
 
 t_complex	sum_z(t_complex z1, t_complex z2);
 t_complex	mult_z(t_complex z1, t_complex z2);
-double		abs_z(double num);
-
-void		render(t_fractal *fractal);
 
 double		ft_atof(char *arr);
 
+double		map_x(int x, t_fractal *fractal);
+double		map_y(int y, t_fractal *fractal);
+void		set_zoom(double zoom, int x, int y, t_fractal *fractal);
+double		scale_range(double num, double new_min, double new_max, double old_min,
+		double old_max);
+
+int			handle_close_x(t_fractal *fractal);
+
+//mandelbrot
+void		init_man(t_fractal *fractal);
+void		render_man(t_fractal *fractal);
+
+//julia
+void		init_julia(t_fractal *fractal);
+void		render_julia(t_fractal *fractal);
+
+//burning ship
+void		init_ship(t_fractal *fractal);
 void		render_ship(t_fractal *fractal);
-t_complex	ship_z(t_complex z, t_complex c);
-void		set_c_ship(t_complex *c, t_fractal *fractal);
-void	check_pixel_ship(int x, int y, t_fractal *fractal);
-void	set_c(t_complex *c, t_complex z, t_fractal *fractal);
+
+//rendering
+void		put_pixel(int x, int y, t_image *image, int color);
+
+//initialization
+void		set_values(t_fractal *fractal);
 
 #endif
