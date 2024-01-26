@@ -6,7 +6,7 @@
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 13:54:41 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/24 16:44:53 by rtavabil         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:11:47 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,17 @@ void	put_pixel(int x, int y, t_image *image, int color)
 	*(unsigned int *)(image->addr + offset) = color;
 }
 
+t_complex	set_z_man(int x, int y, t_fractal *fractal)
+{
+	t_complex	z;
+
+	z.real = scale_range(x, fractal->limit.min_x, fractal->limit.max_x, \
+	WIDTH) + fractal->shift_x;
+	z.im = scale_range(y, fractal->limit.min_y, fractal->limit.max_y, \
+	HEIGHT) + fractal->shift_y;
+	return (z);
+}
+
 void	check_pixel_man(int x, int y, t_fractal *fractal)
 {
 	t_complex	z;
@@ -27,8 +38,7 @@ void	check_pixel_man(int x, int y, t_fractal *fractal)
 	int			i;
 	int			color;
 
-	z.real = scale_range(x, fractal->limit.min_x, fractal->limit.max_x, 0, WIDTH) + fractal->shift_x;
-	z.im = scale_range(y, fractal->limit.min_y, fractal->limit.max_y, 0, HEIGHT) + fractal->shift_y;
+	z = set_z_man(x, y, fractal);
 	c.real = z.real;
 	c.im = z.im;
 	i = 0;
@@ -37,7 +47,7 @@ void	check_pixel_man(int x, int y, t_fractal *fractal)
 		z = sum_z(mult_z(z, z), c);
 		if ((z.real * z.real) + (z.im * z.im) > fractal->escape)
 		{
-			color = scale_range(i, CYAN, WHITE, 0, fractal->iterations);
+			color = scale_range(i, CYAN, MAGENTA, fractal->iterations);
 			put_pixel(x, y, &(fractal->img), color);
 			return ;
 		}
@@ -48,8 +58,8 @@ void	check_pixel_man(int x, int y, t_fractal *fractal)
 
 void	render_man(t_fractal *fractal)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = -1;
 	while (++y < HEIGHT)
@@ -60,6 +70,6 @@ void	render_man(t_fractal *fractal)
 			check_pixel_man(x, y, fractal);
 		}
 	}
-	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win, fractal->img.img, 0,
-			0);
+	mlx_put_image_to_window(fractal->mlx, fractal->mlx_win, \
+	fractal->img.img, 0, 0);
 }

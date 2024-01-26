@@ -6,7 +6,7 @@
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:27:33 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/24 16:46:02 by rtavabil         ###   ########.fr       */
+/*   Updated: 2024/01/26 17:48:21 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,21 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <float.h>
+# include <limits.h>
 
 # define ERROR_MESSAGE "Please enter one of the \
 following:\n\t\"./fractol mandelbrot\"\n\t\"./fractol \
-julia <value 1> <value 2>\"\n"
+julia <double value 1> <double value 2>\"\n\t\"./fractol \
+ship\"\n"
+
+# define NUM_ERROR "Please enter numeric parameters"
 
 # define WIDTH 800
 # define HEIGHT 800
 
 # define ESCAPE 4
-# define ITERATIONS 42
+# define ITERATIONS 100
 
 # define BLACK 0x000000
 # define WHITE 0xFFFFFF
@@ -86,24 +91,24 @@ typedef struct s_fractal
 	double	zoom;
 	double	cx;
 	double	cy;
-	int		mouse_x;
-	int		mouse_y;
 	t_limit	limit;
 }			t_fractal;
 
-int			ft_strncmp(char *s1, char *s2, int n);
+int			ft_strcmp(char *s1, char *s2);
 void		ft_putstr_fd(char *s, int fd);
-void		free_error(void);
+void		init_error(void);
+void		numeric_error(void);
+
 
 t_complex	sum_z(t_complex z1, t_complex z2);
 t_complex	mult_z(t_complex z1, t_complex z2);
 
-double		ft_atof(char *arr);
+double		ft_atold(char *arr);
 
 double		map_x(int x, t_fractal *fractal);
 double		map_y(int y, t_fractal *fractal);
 void		set_zoom(double zoom, int x, int y, t_fractal *fractal);
-double		scale_range(double num, double new_min, double new_max, double old_min,
+double		scale_range(double num, double new_min, double new_max,
 		double old_max);
 
 int			handle_close_x(t_fractal *fractal);
