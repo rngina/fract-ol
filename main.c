@@ -6,7 +6,7 @@
 /*   By: rtavabil <rtavabil@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 14:29:05 by rtavabil          #+#    #+#             */
-/*   Updated: 2024/01/26 17:30:34 by rtavabil         ###   ########.fr       */
+/*   Updated: 2024/01/29 17:00:03 by rtavabil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	main(int argc, char **argv)
 		start_julia(argv, &fractal);
 	else
 	{
-		ft_putstr_fd(ERROR_MESSAGE, 0);
+		ft_putstr_fd(ERROR_MESSAGE, 2);
 		exit(1);
 	}
 }
